@@ -4,12 +4,12 @@ This roadmap separates executable public infrastructure from long-term scientifi
 
 ## v0.1 — Executable starter
 
-Goal: make the project usable and contributable without requiring private data or acceptance of any theory.
+Goal: make the project usable and contributable without requiring real-person data or acceptance of any theory.
 
 - [x] Machine-readable trajectory record schema
 - [x] Controlled life-event vocabulary
 - [x] Fully synthetic examples
-- [x] Record validator with privacy and temporal-leakage checks
+- [x] Record validator with owner-protection, raw-identifier, and temporal-leakage checks
 - [x] Synthetic next-event benchmark smoke test
 - [x] Continuous integration
 - [x] Data policy and contribution templates
@@ -42,16 +42,16 @@ Goal: establish strong non-traditional baselines before testing historical prior
 
 **Evidence gate:** the same benchmark can be reproduced from a clean environment and produces stable results within declared tolerance.
 
-## v0.4 — Public-data pilot protocol
+## v0.4 — Third-party data pilot protocol
 
-Goal: define whether and how a small public-record pilot can be conducted responsibly.
+Goal: define whether and how a small non-synthetic pilot can be conducted responsibly.
 
-- [ ] Data protection and ethics review
-- [ ] Public-record inclusion and exclusion criteria
+- [ ] Data-governance and ethics review
+- [ ] Inclusion and exclusion criteria for public, consented, licensed, or protocol-governed records
 - [ ] Provenance, conflict, correction, and removal procedures
 - [ ] Dataset license and access model
 - [ ] Identity-separated blind evaluation design
-- [ ] No private-conversation or privately supplied cases
+- [ ] Explicit repository-owner opt-out and source-independence checks
 
 **Evidence gate:** a documented reviewer confirms that the protocol meets the repository's data policy before any real-person records are added.
 
@@ -67,7 +67,7 @@ This track is important to HTM's origin, but it is evaluated as a research hypot
 - [ ] Run ablation, permutation, calibration, and cohort-robustness tests
 - [ ] Publish negative and null findings
 
-Private repositories, private conversations, and privately discussed cases are outside this public track.
+The repository owner's trajectory, the owner's private communications, and unpublished private-repository material are outside this public track. Third-party material may enter only through an independently documented public, consent, license, or approved-protocol basis.
 
 ## Research track B — Limits of predictability
 
