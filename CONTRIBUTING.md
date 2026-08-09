@@ -1,97 +1,163 @@
 # Contributing to Human Trajectory Model
 
-Thank you for considering a contribution to HTM. This project brings together several communities that do not usually work in the same repository: machine learning, statistics, life-course research, Chinese studies, traditional MingLi research, data engineering, documentation, and open science.
+HTM is an open research project. A useful contribution can be code, a schema change, a source correction, a benchmark design, a negative result, or a carefully bounded theory representation. It does not need to support any predetermined conclusion.
 
-You do not need to be a programmer to contribute. Source verification, terminology review, theory reconstruction, benchmark criticism, annotation design, and negative results are all first-class contributions.
+## Non-negotiable data boundary
 
-## Before you begin
+Before contributing, read [DATA_POLICY.md](DATA_POLICY.md).
 
-Please keep three distinctions clear.
+Never submit cases or personal information obtained from private conversations, chats, consultations, family, friends, clients, or other private individuals. A synthetic example must be intentionally fictional, not a lightly altered real case. Pull requests containing unauthorized personal data will be closed and the data may require history remediation.
 
-First, HTM studies traditional theories without assuming they are correct. A contribution may preserve a historical claim, translate it into a formal representation, test it, criticize it, or show that it fails.
+## Development setup
 
-Second, historical description and modern interpretation must be separated. When documenting a classical source, identify what the source actually says, what later commentators add, and what your own interpretation proposes.
+```bash
+git clone https://github.com/DeeplumenClaw/human-trajectory-model.git
+cd human-trajectory-model
+python -m pip install -e ".[dev]"
+htm validate examples/synthetic/*.json
+htm benchmark benchmark/tasks/next-event-synthetic-v0.1.yaml
+pytest -q
+```
 
-Third, project claims should be reproducible. Important statements should point to a source, a dataset record, an experiment, or a clearly labeled hypothesis.
+Use a focused branch and keep each pull request narrow enough to review.
 
-## Ways to contribute
+## Contribution contracts
 
-### Source and textual research
+The project grows through standardized artifacts. Choose the closest contract below.
 
-You may contribute reliable editions, bibliographic records, textual comparisons, source notes, chapter summaries, or corrections to existing quotations. Please include edition details and page or section references whenever possible.
+### 1. Add or revise a life-event type
 
-### Traditional theory documentation
+Edit `ontology/event-types.yaml`. A contribution must include:
 
-You may document a concept, rule, reasoning pattern, practitioner method, disagreement, exception, or case tradition. Contributions should describe scope and uncertainty rather than present a school-specific interpretation as universal.
+- a stable namespaced ID;
+- a domain;
+- an inclusion definition;
+- at least one positive example;
+- at least one exclusion or boundary case;
+- required attributes, if any;
+- discussion of cultural, historical, privacy, or leakage limitations.
 
-### Terminology and translation
+Acceptance means the definition can be applied consistently by someone other than its author and all validation tests pass.
 
-Chinese concepts often have no exact English equivalent. Good terminology contributions should preserve distinctions, document alternative translations, and explain what information is lost or changed in translation.
+### 2. Add a synthetic trajectory
 
-### Data and schema design
+Add a JSON record under `examples/synthetic/`. It must:
 
-You may propose improvements to life-event types, evidence confidence, temporal uncertainty, privacy controls, annotation rules, or longitudinal record formats. Please include examples and discuss possible information leakage.
+- pass the executable schemas;
+- be intentionally fictional;
+- use only ontology event types;
+- set both private-data flags to `false`;
+- use synthetic provenance for birth and events;
+- contain a prediction cutoff with permitted and hidden event IDs;
+- add or update a test when it exercises new behavior.
 
-### Modeling and evaluation
+Run:
 
-You may contribute baselines, theory encoders, graph representations, temporal models, calibration methods, benchmark tasks, robustness checks, or ablation experiments. New models should be compared with simple and strong baselines.
+```bash
+htm validate path/to/record.json
+```
 
-### Review, replication, and criticism
+### 3. Propose a benchmark task
 
-Replication failures, counterexamples, unclear definitions, unsupported claims, and evidence of no predictive improvement are valuable contributions. The project does not treat negative results as project failures.
+Open a benchmark-task issue before implementing a major task. Define:
 
-### Documentation
+- available inputs at prediction time;
+- cutoff and prediction horizon;
+- target and exact label rule;
+- train, validation, and test strategy;
+- baseline models;
+- metrics and calibration reporting;
+- leakage risks and exclusions;
+- data governance and licensing;
+- conditions under which the hypothesis would be rejected or downgraded.
 
-Clear explanations, diagrams, tutorials, examples, issue templates, contributor guides, and Chinese translations are welcome.
+A benchmark should reward calibrated, reproducible prediction rather than persuasive narrative.
 
-## Contribution workflow
+### 4. Add or reproduce a baseline
 
-For small corrections and documentation improvements, you may open a pull request directly.
+A baseline contribution must include:
 
-For major changes, open an issue first. Major changes include new theoretical frameworks, new benchmark tasks, changes to core schemas, model architecture proposals, dataset releases, or claims that affect the public positioning of HTM.
+- implementation and configuration;
+- exact run command;
+- dependency and random-seed information;
+- tests;
+- a result card;
+- failures and limitations;
+- comparison with an appropriately simple baseline.
 
-A good proposal issue should explain:
+Do not scale model size before showing that the task and data pipeline contain a reproducible signal.
 
-1. the problem being addressed;
-2. the evidence or sources involved;
-3. the proposed change;
-4. how the change can be reviewed or tested;
-5. known limitations or competing interpretations.
+### 5. Formalize a theory claim
 
-## Pull request expectations
+Theory contributions must separate:
 
-A pull request should be narrow enough to review. It should explain what changed, why the change is needed, what evidence supports it, and what remains uncertain.
+1. the historical source;
+2. later commentarial interpretation;
+3. modern practitioner claim;
+4. the contributor's formalization;
+5. the proposed test;
+6. known exceptions and counterexamples.
 
-Source-based contributions should include references. Experimental contributions should include reproducible instructions and report failed as well as successful runs. Schema changes should include before-and-after examples. Terminology changes should note affected documents.
+Include edition, section, page, or stable public identifier where possible. Do not copy unlicensed modern books or proprietary course materials into the repository.
 
-Do not include private personal data, unlicensed copyrighted material, or sensitive case records.
+A computational representation should specify its inputs, outputs, conditions, version, and failure criteria. Traditional authority justifies investigation, not acceptance.
+
+### 6. Improve terminology or translation
+
+A terminology contribution should document:
+
+- the Chinese term and characters;
+- pinyin where useful;
+- candidate English renderings;
+- distinctions lost in translation;
+- historical or school-specific variation;
+- reliable sources.
+
+Avoid forcing different concepts into one convenient English label.
 
 ## Evidence labels
 
-Contributors are encouraged to distinguish among the following types of content:
+Use these distinctions in documents and proposals:
 
 - `historical-source`: directly supported by an identifiable historical text;
 - `commentarial-interpretation`: attributed to a later commentator or school;
 - `practitioner-claim`: documented in modern practice literature or teaching;
-- `project-hypothesis`: proposed by HTM contributors but not yet validated;
+- `project-hypothesis`: proposed but not validated;
 - `experimental-result`: supported by a documented experiment;
-- `negative-result`: a tested claim or representation that did not perform as expected;
+- `negative-result`: tested without the expected improvement;
 - `open-question`: unresolved or contested.
 
-## Good first issues
+## Pull-request requirements
 
-Beginner-friendly tasks may include source verification, glossary improvements, documentation edits, small schema examples, public-event annotation, or reproduction of a simple baseline. Look for the `good first issue` label.
+A pull request should explain:
 
-## Discussion culture
+- the problem;
+- the exact change;
+- evidence or sources;
+- how to validate it;
+- limitations and competing interpretations;
+- data and licensing implications.
 
-HTM welcomes skeptical and supportive contributors. Critique claims, methods, translations, and evidence rather than people or communities. Traditional knowledge practitioners and scientific researchers may use different vocabularies; contributors should make assumptions explicit and avoid dismissive language in either direction.
+Before opening a pull request:
 
-## Language
+```bash
+htm validate examples/synthetic/*.json
+htm benchmark benchmark/tasks/next-event-synthetic-v0.1.yaml
+pytest -q
+```
 
-Issues may be opened in English or Chinese. Pull requests that affect stable public documentation should preferably include English text. Chinese source notes and terminology discussions are welcome and often necessary.
+The pull-request template contains a mandatory privacy declaration.
 
-## Current priority areas
+## Review and task ownership
 
-The project currently needs the most help with source inventories, theory reconstruction, terminology, knowledge representation, trajectory schemas, baseline definitions, and falsifiable benchmark design.
+- Comment on an issue before beginning a substantial contribution.
+- Maintainers may assign or mark an issue as claimed.
+- If work becomes inactive, the issue may be reopened for another contributor.
+- Reviews evaluate evidence, scope, compatibility, privacy, and reproducibility—not agreement with a preferred theory.
+- A null or negative result is eligible for acceptance when the protocol is sound.
 
-Thank you for helping build a project in which inherited knowledge can be preserved accurately, tested openly, corrected responsibly, and extended collaboratively.
+## Language and conduct
+
+Issues may be opened in English or Chinese. Stable public documentation should eventually have an English version; Chinese text is often necessary for source accuracy.
+
+Follow [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md). Critique claims and methods rather than contributors or communities.
