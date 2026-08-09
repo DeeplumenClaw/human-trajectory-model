@@ -33,15 +33,15 @@ HTM is not a fortune-telling product and does not assume that any historical the
 
 ## Current artifact: HTM Starter v0.1
 
-This repository now provides a small, executable research core rather than only a project proposal:
+This repository provides a small, executable research core rather than only a project proposal:
 
 - a machine-readable trajectory record schema;
 - a controlled life-event vocabulary;
 - six fully synthetic trajectory examples;
-- a validation CLI with privacy and leakage checks;
+- a validation CLI with owner-protection, raw-identifier, and leakage checks;
 - a reproducible synthetic next-event benchmark smoke test;
 - contribution templates for event types, benchmark tasks, and research proposals;
-- an explicit data policy that forbids private-conversation cases and unconsented private data.
+- a data policy that separates the repository owner's absolute opt-out from the allowed bases for third-party data.
 
 The synthetic benchmark verifies the infrastructure. It is **not** evidence that human trajectories, MingLi representations, or any other theory have predictive validity.
 
@@ -79,7 +79,7 @@ HTM separates a theory-neutral public core from several research tracks.
 - leakage-resistant evaluation protocols;
 - demographic, history-only, and temporal baselines;
 - probability calibration, uncertainty, and abstention;
-- privacy and data-governance rules.
+- data governance and publication rules.
 
 ### Research tracks
 
@@ -113,16 +113,20 @@ See:
 - [Contributing](CONTRIBUTING.md)
 - [Data policy](DATA_POLICY.md)
 
-## Data boundary
+## Data governance
 
-The following material must never be committed to this repository:
+The repository owner has an absolute opt-out: HTM must not contain a trajectory record about the owner or any research material derived from the owner's private communications. A third-party fact mentioned in such a communication cannot use that communication as its source; it may be considered only from an independent allowed source.
 
-- cases or personal details obtained from private conversations, chats, messages, or consultations;
-- information about the contributor's family, friends, clients, or other private individuals without explicit research consent and review;
-- private addresses, contact details, medical records, financial-account data, or raw private correspondence;
-- data whose license or provenance cannot be documented.
+This owner-specific rule is not imposed as a blanket prohibition on everyone else. Third-party data may be proposed under one of four declared bases:
 
-The starter dataset is entirely synthetic. Public-person and consented-volunteer datasets require separate review before they can become part of a benchmark. Read [DATA_POLICY.md](DATA_POLICY.md) before proposing any data contribution.
+- public records with provenance and a lawful-use review;
+- informed consent;
+- a dataset license that permits the intended use;
+- an approved research protocol with appropriate access and publication controls.
+
+Regardless of basis, the public repository should not contain unnecessary raw passwords, authentication material, government identifiers, bank-account numbers, private correspondence, or personal contact details.
+
+The starter dataset is entirely synthetic. Read [DATA_POLICY.md](DATA_POLICY.md) before proposing any non-synthetic data contribution.
 
 ## Contributing
 
@@ -155,7 +159,7 @@ Please comment on an issue before starting a substantial contribution so scope a
 3. **Evidence before authority.** Historical status and expert reputation justify attention, not automatic acceptance.
 4. **Failure is data.** Null results, failed representations, and counterexamples must be preserved.
 5. **Uncertainty is part of the output.** A model should communicate calibration, missing information, and reasons to abstain.
-6. **Privacy is not optional.** Access to a private case or conversation is never permission to publish or train on it.
+6. **Data basis must be explicit.** The owner's opt-out is absolute; every third-party record must declare whether it is public, consented, licensed, or governed by an approved protocol.
 
 ## Status and scope
 

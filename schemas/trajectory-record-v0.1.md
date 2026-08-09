@@ -7,29 +7,39 @@ This document is the human-readable companion to the executable schemas:
 - `schemas/trajectory-record.schema.json`
 - `schemas/life-event.schema.json`
 
-The JSON Schemas are authoritative for automated validation. This document explains the design intent.
+The JSON Schemas are authoritative for automated validation. This document explains the design intent. Governance fields were refined in schema version `0.1.1` to distinguish the repository owner's absolute opt-out from the allowed bases for third-party data.
 
 ## Purpose
 
-The schema defines the minimum information required for an HTM pilot record. The v0.1 repository contains synthetic records only. It must not be reused for private individuals without a separately reviewed consent, privacy, licensing, and withdrawal protocol.
+The schema defines the minimum information required for an HTM pilot record. The starter repository contains synthetic records only. Future non-synthetic records require a declared source and authorization basis, provenance, licensing, and review appropriate to the intended use.
 
 ## Core identity and governance
 
 ```yaml
-schema_version: 0.1.0
+schema_version: 0.1.1
 record_id: stable internal identifier
-entity_type: synthetic | public_figure | consented_volunteer
+entity_type: synthetic | public_figure | consented_volunteer | research_dataset_subject
 synthetic: boolean
 public_name: optional; null for starter synthetic records
 data_governance:
-  source_scope: synthetic | public_record | consented
-  contains_private_conversation_data: false
-  contains_unconsented_private_data: false
+  source_scope: synthetic | public_record | consented | licensed_dataset | approved_research_protocol
+  authorization_basis: synthetic | public_record | consent | dataset_license | approved_protocol
+  contains_repository_owner_data: false
+  derived_from_owner_private_communications: false
   license: string
-  review_status: synthetic_verified | unreviewed | reviewed
+  review_status: synthetic_verified | unreviewed | reviewed | restricted
 ```
 
-Both private-data flags are schema-level constants set to `false`. A record sourced from a private conversation is prohibited rather than merely low-confidence.
+The two owner-protection fields are schema-level constants set to `false`. They implement the repository owner's absolute opt-out; they do not impose that same opt-out on all other people.
+
+Third-party records instead declare why the data may be used:
+
+- `public_figure` pairs with `public_record`;
+- `consented_volunteer` pairs with `consent`;
+- `research_dataset_subject` pairs with either `dataset_license` or `approved_protocol`;
+- `synthetic` pairs with `synthetic`.
+
+Schema validity does not by itself establish lawful use, ethical acceptability, or scientific quality. See `DATA_POLICY.md`.
 
 ## Birth information
 
@@ -46,7 +56,7 @@ birth:
   time_precision: exact | minute | hour | approximate | unknown
   confidence_grade: AA | A | B | C | D | synthetic | unknown
   provenance:
-    source_type: synthetic | certificate | official_record | direct_statement | biography | secondary | consented_statement | unknown
+    source_type: synthetic | certificate | official_record | direct_statement | biography | secondary | consented_statement | licensed_dataset | approved_protocol | unknown
     citation: string
     accessed_at: date or null
   ambiguities:
@@ -68,7 +78,7 @@ background:
   historical_cohort: string
 ```
 
-Sensitive attributes require a declared research need and governance review.
+Sensitive attributes require a declared research need, data minimization, and governance review.
 
 ## Life events
 
@@ -115,15 +125,16 @@ derived:
 
 ## Quality controls
 
-A record is excluded from a real-data benchmark when:
+A record is excluded from a benchmark when:
 
 - provenance is insufficient for the task;
+- its authorization basis does not support the proposed use or redistribution;
 - an event was used both to infer an input and score a hidden target;
 - event dates cannot meet the task's minimum precision;
 - biography leakage reveals the future label;
 - sources materially conflict and the conflict is unresolved;
-- consent, licensing, or privacy requirements are not met.
+- required review or access controls are not met.
 
-## Data minimization
+## Repository limits
 
-Do not collect private addresses, contact details, private medical records, financial-account information, raw correspondence, or information about non-public relatives. See `DATA_POLICY.md` for the binding repository rule.
+Do not collect or publish raw passwords, authentication material, government identifiers, bank-account numbers, private correspondence, or personal contact details. Sensitive trajectory events may be represented when necessary and appropriately governed. The repository owner's personal trajectory and material derived from the owner's private communications remain prohibited. See `DATA_POLICY.md` for the binding rule.

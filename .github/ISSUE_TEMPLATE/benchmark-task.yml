@@ -52,7 +52,8 @@ body:
   - type: textarea
     id: data
     attributes:
-      label: Data governance, provenance, and license
+      label: Data basis, provenance, license, and publication controls
+      description: State whether the data are synthetic, public record, consented, licensed, or governed by an approved protocol.
     validations:
       required: true
   - type: checkboxes
@@ -62,5 +63,7 @@ body:
       options:
         - label: I have read DATA_POLICY.md.
           required: true
-        - label: The proposal does not rely on private-conversation cases or unconsented private-person data.
+        - label: The proposal contains no repository-owner trajectory data and is not derived from the owner's private communications.
+          required: true
+        - label: Every proposed non-synthetic third-party source has a declared allowed basis.
           required: true

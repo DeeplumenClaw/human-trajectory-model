@@ -1,82 +1,99 @@
 # HTM Data Policy
 
-Human trajectory data can expose intimate information about identity, family, health, relationships, finances, location, and life history. This policy is a binding contribution rule, not a suggestion.
+Human trajectory research can involve identity, family, health, relationships, finances, location, and life history. This policy separates one owner-specific opt-out from the governance rules for all other data.
 
-## Absolute prohibition: private-conversation cases
+## 1. Absolute opt-out for the repository owner
 
-Do not commit, quote, summarize, encode, label, or derive a record from:
+The following material must never be used as HTM research data or committed to this repository:
 
-- private conversations, chats, messages, emails, consultations, or voice transcripts;
-- cases discussed privately with an AI assistant, researcher, practitioner, or contributor;
-- information about a contributor's family, friends, clients, colleagues, or acquaintances;
-- a private person's birth details, life events, health, finances, relationships, legal history, or other personal circumstances;
-- any record whose inclusion relies on the assumption that sharing information in a conversation implied consent for research or publication.
+- a trajectory record about the repository owner;
+- the owner's birth details, life events, health, finances, relationships, family circumstances, legal history, or other personal trajectory information;
+- facts, cases, notes, summaries, labels, features, or examples derived from the owner's private conversations, chats, messages, emails, consultations, or voice transcripts;
+- synthetic records that are lightly altered versions of the owner or of material taken from those private communications.
 
-Access is not consent. Anonymization after collection does not cure an unauthorized source.
+Routine authorship, commit, and repository-administration metadata are not trajectory research data and are outside this rule.
 
-## Data permitted in the repository
+A third-party fact mentioned in a private communication with the owner may not use that communication as its source. The same fact may be considered only when it is independently supported by an allowed third-party source and passes the applicable review below.
 
-### 1. Synthetic records
+This owner-specific opt-out is absolute. Public availability elsewhere does not authorize HTM to create a trajectory record about the owner.
+
+## 2. Allowed bases for third-party data
+
+Other people are governed by a declared source and use basis rather than by the owner's personal opt-out. A non-synthetic record must use one of these bases:
+
+### Public record
+
+Public-figure or public-event data may be proposed when the contribution documents:
+
+- a declared research purpose;
+- source provenance and access dates;
+- a license, terms-of-use analysis, or other lawful-use basis;
+- data minimization;
+- correction and conflict procedures;
+- re-identification and harm review where relevant;
+- an approved benchmark or research protocol.
+
+Public availability alone does not guarantee scientific quality or unrestricted reuse.
+
+### Consent
+
+Volunteer or contributor-supplied data may be used under a separately reviewed consent process covering allowed uses, publication, withdrawal, retention, security, and downstream model use. A pull request by itself is not a complete consent protocol.
+
+### Licensed dataset
+
+A research or commercial dataset may be used when its license and access terms permit the intended processing and publication. The contribution must document the dataset version, permitted uses, restrictions, and whether raw records may be redistributed.
+
+### Approved research protocol
+
+Data may be processed under an institutional, ethics-reviewed, or otherwise approved research protocol when the repository contribution describes the approval basis, access controls, publication limits, and de-identification method. Restricted data should not be copied into the public repository merely because derived results may be published.
+
+### Synthetic data
 
 Synthetic records are the default for examples, tests, tutorials, and infrastructure development. They must:
 
 - be intentionally fictional rather than lightly altered real cases;
 - use `entity_type: synthetic` and `synthetic: true`;
-- set `contains_private_conversation_data: false`;
+- set both owner-protection flags to `false`;
+- use `source_scope: synthetic` and `authorization_basis: synthetic`;
 - avoid real names, contact details, addresses, account identifiers, and copied biographies;
 - state the applicable license.
 
-### 2. Public-record data
+The v0.1 starter contains synthetic records only.
 
-Public availability does not automatically make collection ethical or legally reusable. A public-record proposal requires, before inclusion:
+## 3. Repository-level limits
 
-- a declared research purpose;
-- source provenance and access dates;
-- a documented license or lawful-use analysis;
-- data minimization;
-- conflict and correction procedures;
-- privacy and re-identification review;
-- an approved benchmark protocol.
+Regardless of data basis, do not commit raw passwords, authentication material, government identifiers, bank-account numbers, private correspondence, personal contact details, or other secrets that are unnecessary for the declared research task.
 
-No public-person records are part of the v0.1 starter.
+Health, financial, relationship, and other sensitive events are not categorically excluded from trajectory research, but their inclusion requires a precise research need, data minimization, provenance, appropriate access and publication controls, and explicit risk review.
 
-### 3. Consented volunteer data
+## 4. Provenance and licensing
 
-Consented data requires a separate protocol covering informed consent, allowed uses, withdrawal, retention, security, publication, and downstream model use. A pull request is not an adequate consent process. No volunteer records should be added until that protocol is reviewed and approved.
-
-## Prohibited fields and materials
-
-Do not include raw private addresses, personal email addresses, phone numbers, private correspondence, passwords, authentication material, financial-account details, private medical records, government identifiers, or information about non-public relatives.
-
-Sensitive attributes should be collected only when necessary for a declared research question and when their risks, benefits, and governance are documented.
-
-## Provenance and licensing
-
-Every non-synthetic record and event must identify its source, source type, access date, evidence confidence, and usage rights. Unclear provenance or licensing is grounds for exclusion.
+Every non-synthetic record and event must identify its source, source type, access date, evidence confidence, authorization basis, and usage rights. Unclear provenance or incompatible licensing is grounds for exclusion.
 
 Repository code and documentation licensing does not automatically license contributed datasets. Each dataset release must state its own license and access conditions.
 
-## Leakage and scientific integrity
+## 5. Leakage and scientific integrity
 
 Data must not leak hidden outcomes into model inputs. In particular:
 
 - events after the prediction cutoff must not appear in the permitted history;
 - a biography title or description that directly states the target must not be used as input;
-- information used to infer or correct a birth time must not also be scored as a hidden outcome;
-- duplicate or near-duplicate biographies of one person must not cross evaluation splits.
+- information used to infer or correct an input must not also be scored as a hidden outcome;
+- duplicate or near-duplicate records of one person must not cross evaluation splits.
 
-## Removal and incident response
+## 6. Removal and incident response
 
-A privacy concern takes priority over benchmark continuity. Maintainers may immediately remove or quarantine a record while provenance, consent, licensing, or re-identification risk is reviewed. Git history may require additional remediation beyond deleting the current file.
+A concern about the owner's opt-out, provenance, authorization, licensing, or unnecessary raw identifiers takes priority over benchmark continuity. Maintainers may immediately remove or quarantine material while it is reviewed. Git history may require additional remediation beyond deleting the current file.
 
-Report a sensitive concern to the repository owner using the contact method on the owner's GitHub profile. Do not place private details in a public issue.
+Report a sensitive concern to the repository owner using the contact method on the owner's GitHub profile. Do not place sensitive details in a public issue.
 
 ## Pull-request declaration
 
 Every pull request that adds or changes data must affirm that:
 
-- it contains no private-conversation material;
-- it contains no unconsented private-person data;
-- provenance and licensing are documented;
-- the contributor has read this policy;
-- synthetic records are not derived from real private cases.
+- it contains no trajectory record about the repository owner;
+- it is not derived from the owner's private communications;
+- every non-synthetic third-party record declares an allowed basis: public record, consent, dataset license, or approved protocol;
+- provenance, redistribution rights, and publication limits are documented;
+- synthetic records are intentionally fictional and not derived from the owner;
+- the contributor has read this policy.

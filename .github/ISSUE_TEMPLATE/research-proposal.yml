@@ -50,12 +50,21 @@ body:
       label: Limitations, counterexamples, and competing interpretations
     validations:
       required: true
+  - type: textarea
+    id: data_basis
+    attributes:
+      label: Data basis and publication controls
+      description: For non-synthetic third-party data, state whether the basis is public record, consent, dataset license, or approved protocol.
+    validations:
+      required: true
   - type: checkboxes
     id: declaration
     attributes:
       label: Declarations
       options:
-        - label: This proposal contains no private-conversation case or unconsented private-person data.
+        - label: This proposal contains no repository-owner trajectory data and is not derived from the owner's private communications.
+          required: true
+        - label: Any non-synthetic third-party data has a declared allowed basis.
           required: true
         - label: I will not submit unlicensed copyrighted text.
           required: true

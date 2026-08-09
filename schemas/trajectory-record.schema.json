@@ -20,7 +20,7 @@
   "properties": {
     "schema_version": {
       "type": "string",
-      "const": "0.1.0"
+      "const": "0.1.1"
     },
     "record_id": {
       "type": "string",
@@ -28,7 +28,12 @@
     },
     "entity_type": {
       "type": "string",
-      "enum": ["synthetic", "public_figure", "consented_volunteer"]
+      "enum": [
+        "synthetic",
+        "public_figure",
+        "consented_volunteer",
+        "research_dataset_subject"
+      ]
     },
     "synthetic": {
       "type": "boolean"
@@ -42,21 +47,38 @@
       "additionalProperties": false,
       "required": [
         "source_scope",
-        "contains_private_conversation_data",
-        "contains_unconsented_private_data",
+        "authorization_basis",
+        "contains_repository_owner_data",
+        "derived_from_owner_private_communications",
         "license",
         "review_status"
       ],
       "properties": {
         "source_scope": {
           "type": "string",
-          "enum": ["synthetic", "public_record", "consented"]
+          "enum": [
+            "synthetic",
+            "public_record",
+            "consented",
+            "licensed_dataset",
+            "approved_research_protocol"
+          ]
         },
-        "contains_private_conversation_data": {
+        "authorization_basis": {
+          "type": "string",
+          "enum": [
+            "synthetic",
+            "public_record",
+            "consent",
+            "dataset_license",
+            "approved_protocol"
+          ]
+        },
+        "contains_repository_owner_data": {
           "type": "boolean",
           "const": false
         },
-        "contains_unconsented_private_data": {
+        "derived_from_owner_private_communications": {
           "type": "boolean",
           "const": false
         },
@@ -67,7 +89,7 @@
         },
         "review_status": {
           "type": "string",
-          "enum": ["synthetic_verified", "unreviewed", "reviewed"]
+          "enum": ["synthetic_verified", "unreviewed", "reviewed", "restricted"]
         }
       }
     },
@@ -132,6 +154,8 @@
                 "biography",
                 "secondary",
                 "consented_statement",
+                "licensed_dataset",
+                "approved_protocol",
                 "unknown"
               ]
             },
@@ -245,7 +269,63 @@
           "data_governance": {
             "properties": {
               "source_scope": {"const": "synthetic"},
+              "authorization_basis": {"const": "synthetic"},
               "review_status": {"const": "synthetic_verified"}
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {"entity_type": {"const": "public_figure"}},
+        "required": ["entity_type"]
+      },
+      "then": {
+        "properties": {
+          "synthetic": {"const": false},
+          "data_governance": {
+            "properties": {
+              "source_scope": {"const": "public_record"},
+              "authorization_basis": {"const": "public_record"}
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {"entity_type": {"const": "consented_volunteer"}},
+        "required": ["entity_type"]
+      },
+      "then": {
+        "properties": {
+          "synthetic": {"const": false},
+          "data_governance": {
+            "properties": {
+              "source_scope": {"const": "consented"},
+              "authorization_basis": {"const": "consent"}
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {"entity_type": {"const": "research_dataset_subject"}},
+        "required": ["entity_type"]
+      },
+      "then": {
+        "properties": {
+          "synthetic": {"const": false},
+          "data_governance": {
+            "properties": {
+              "source_scope": {
+                "enum": ["licensed_dataset", "approved_research_protocol"]
+              },
+              "authorization_basis": {
+                "enum": ["dataset_license", "approved_protocol"]
+              }
             }
           }
         }
