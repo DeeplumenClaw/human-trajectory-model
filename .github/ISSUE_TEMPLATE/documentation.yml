@@ -30,5 +30,7 @@ body:
     attributes:
       label: Declaration
       options:
-        - label: This issue contains no private-conversation case or unconsented private-person data.
+        - label: This issue contains no repository-owner trajectory data and is not derived from the owner's private communications.
+          required: true
+        - label: Any non-synthetic third-party source cited here has a declared public, consent, license, or approved-protocol basis.
           required: true
