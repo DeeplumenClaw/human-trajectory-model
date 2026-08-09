@@ -1,0 +1,145 @@
+{
+  "schema_version": "0.1.0",
+  "record_id": "synthetic-001",
+  "entity_type": "synthetic",
+  "synthetic": true,
+  "public_name": null,
+  "data_governance": {
+    "source_scope": "synthetic",
+    "contains_private_conversation_data": false,
+    "contains_unconsented_private_data": false,
+    "license": "Apache-2.0",
+    "review_status": "synthetic_verified"
+  },
+  "birth": {
+    "local_date": "1988-04-12",
+    "local_time": "08:30",
+    "timezone": "Asia/Shanghai",
+    "location": {
+      "city": "Harbor City",
+      "country": "CN",
+      "latitude": null,
+      "longitude": null
+    },
+    "time_precision": "minute",
+    "confidence_grade": "synthetic",
+    "provenance": {
+      "source_type": "synthetic",
+      "citation": "synthetic://synthetic-001/birth",
+      "accessed_at": null
+    },
+    "ambiguities": {
+      "daylight_saving": null,
+      "calendar_system": "proleptic_gregorian",
+      "alternative_times": []
+    }
+  },
+  "background": {
+    "sex_or_gender": null,
+    "birth_region": "Harbor City, CN",
+    "socioeconomic_context": "synthetic-middle-context",
+    "family_context": null,
+    "historical_cohort": "1980s-urban-cohort"
+  },
+  "events": [
+    {
+      "event_id": "e01",
+      "event_type": "education.enrollment",
+      "start_date": "2006-09-01",
+      "end_date": null,
+      "date_precision": "day",
+      "location": "Metro A",
+      "attributes": {},
+      "evidence_confidence": "synthetic",
+      "provenance": {
+        "source_type": "synthetic",
+        "citation": "synthetic://synthetic-001/e01",
+        "accessed_at": null
+      },
+      "label_eligibility": "synthetic"
+    },
+    {
+      "event_id": "e02",
+      "event_type": "education.graduation",
+      "start_date": "2010-06-30",
+      "end_date": null,
+      "date_precision": "day",
+      "location": "Metro A",
+      "attributes": {},
+      "evidence_confidence": "synthetic",
+      "provenance": {
+        "source_type": "synthetic",
+        "citation": "synthetic://synthetic-001/e02",
+        "accessed_at": null
+      },
+      "label_eligibility": "synthetic"
+    },
+    {
+      "event_id": "e03",
+      "event_type": "career.employment_start",
+      "start_date": "2010-08-01",
+      "end_date": null,
+      "date_precision": "day",
+      "location": "Metro A",
+      "attributes": {},
+      "evidence_confidence": "synthetic",
+      "provenance": {
+        "source_type": "synthetic",
+        "citation": "synthetic://synthetic-001/e03",
+        "accessed_at": null
+      },
+      "label_eligibility": "synthetic"
+    },
+    {
+      "event_id": "e04",
+      "event_type": "career.role_change",
+      "start_date": "2014-05-01",
+      "end_date": null,
+      "date_precision": "day",
+      "location": "Metro A",
+      "attributes": {},
+      "evidence_confidence": "synthetic",
+      "provenance": {
+        "source_type": "synthetic",
+        "citation": "synthetic://synthetic-001/e04",
+        "accessed_at": null
+      },
+      "label_eligibility": "synthetic"
+    },
+    {
+      "event_id": "e05",
+      "event_type": "career.founding_company",
+      "start_date": "2018-03-15",
+      "end_date": null,
+      "date_precision": "day",
+      "location": "Metro A",
+      "attributes": {},
+      "evidence_confidence": "synthetic",
+      "provenance": {
+        "source_type": "synthetic",
+        "citation": "synthetic://synthetic-001/e05",
+        "accessed_at": null
+      },
+      "label_eligibility": "synthetic"
+    }
+  ],
+  "prediction_context": {
+    "cutoff_date": "2016-12-31",
+    "information_snapshot_id": "synthetic-001-snapshot-v1",
+    "permitted_event_ids": [
+      "e01",
+      "e02",
+      "e03",
+      "e04"
+    ],
+    "hidden_future_event_ids": [
+      "e05"
+    ]
+  },
+  "derived": {
+    "demographic_features_version": "none-v0",
+    "birth_representation_version": null,
+    "trajectory_encoding_version": "raw-events-v0.1",
+    "generated_at": "2026-08-09T00:00:00Z"
+  }
+}
