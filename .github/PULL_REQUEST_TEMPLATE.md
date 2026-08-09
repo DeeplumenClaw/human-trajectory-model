@@ -22,13 +22,14 @@ htm benchmark benchmark/tasks/next-event-synthetic-v0.1.yaml
 pytest -q
 ```
 
-## Data and privacy declaration
+## Data-governance declaration
 
 - [ ] I have read `DATA_POLICY.md`.
-- [ ] This pull request contains no cases or personal details obtained from private conversations, chats, consultations, family, friends, clients, or other private individuals.
-- [ ] Any synthetic record is intentionally fictional and is not a lightly altered real case.
-- [ ] This pull request contains no unconsented private-person data.
-- [ ] Provenance and licensing are documented for any non-synthetic source material.
+- [ ] This pull request contains no trajectory record about the repository owner and is not derived from the owner's private communications.
+- [ ] Any synthetic record is intentionally fictional and is not a lightly altered version of the owner or another real case.
+- [ ] Every non-synthetic third-party record declares one allowed basis: public record, informed consent, dataset license, or approved research protocol.
+- [ ] Provenance, usage rights, redistribution limits, and publication controls are documented where applicable.
+- [ ] This pull request contains no unnecessary raw secrets, government identifiers, bank-account numbers, private correspondence, or personal contact details.
 
 ## Limitations and competing interpretations
 
