@@ -1,13 +1,14 @@
 {
-  "schema_version": "0.1.0",
+  "schema_version": "0.1.1",
   "record_id": "synthetic-002",
   "entity_type": "synthetic",
   "synthetic": true,
   "public_name": null,
   "data_governance": {
     "source_scope": "synthetic",
-    "contains_private_conversation_data": false,
-    "contains_unconsented_private_data": false,
+    "authorization_basis": "synthetic",
+    "contains_repository_owner_data": false,
+    "derived_from_owner_private_communications": false,
     "license": "Apache-2.0",
     "review_status": "synthetic_verified"
   },
