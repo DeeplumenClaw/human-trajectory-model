@@ -9,12 +9,14 @@ import yaml
 from jsonschema import Draft202012Validator, FormatChecker
 from referencing import Registry, Resource
 
-PROHIBITED_KEYS = {
+PROHIBITED_RAW_KEYS = {
     "address",
+    "authentication_token",
+    "bank_account_number",
     "chat_log",
     "conversation_id",
+    "credit_card_number",
     "email",
-    "financial_account",
     "government_id",
     "medical_record",
     "password",
@@ -91,8 +93,10 @@ def _walk_prohibited_keys(value: Any, path: str = "$") -> list[str]:
     if isinstance(value, dict):
         for key, child in value.items():
             child_path = f"{path}.{key}"
-            if key.lower() in PROHIBITED_KEYS:
-                issues.append(f"{child_path}: prohibited private-data field name")
+            if key.lower() in PROHIBITED_RAW_KEYS:
+                issues.append(
+                    f"{child_path}: prohibited raw identifier, secret, or private-correspondence field name"
+                )
             issues.extend(_walk_prohibited_keys(child, child_path))
     elif isinstance(value, list):
         for index, child in enumerate(value):
@@ -122,10 +126,12 @@ def validate_record_data(
     issues.extend(_walk_prohibited_keys(record))
 
     governance = record.get("data_governance", {})
-    if governance.get("contains_private_conversation_data") is not False:
-        issues.append("$.data_governance.contains_private_conversation_data must be false")
-    if governance.get("contains_unconsented_private_data") is not False:
-        issues.append("$.data_governance.contains_unconsented_private_data must be false")
+    if governance.get("contains_repository_owner_data") is not False:
+        issues.append("$.data_governance.contains_repository_owner_data must be false")
+    if governance.get("derived_from_owner_private_communications") is not False:
+        issues.append(
+            "$.data_governance.derived_from_owner_private_communications must be false"
+        )
 
     events = record.get("events")
     if not isinstance(events, list):
@@ -147,7 +153,11 @@ def validate_record_data(
 
     prediction = record.get("prediction_context", {})
     cutoff_raw = prediction.get("cutoff_date")
-    cutoff = _parse_date(cutoff_raw, "$.prediction_context.cutoff_date", issues) if isinstance(cutoff_raw, str) else None
+    cutoff = (
+        _parse_date(cutoff_raw, "$.prediction_context.cutoff_date", issues)
+        if isinstance(cutoff_raw, str)
+        else None
+    )
     permitted = prediction.get("permitted_event_ids", [])
     hidden = prediction.get("hidden_future_event_ids", [])
 
@@ -159,10 +169,15 @@ def validate_record_data(
                 + ", ".join(overlap)
             )
 
-        for category, event_ids in (("permitted_event_ids", permitted), ("hidden_future_event_ids", hidden)):
+        for category, event_ids in (
+            ("permitted_event_ids", permitted),
+            ("hidden_future_event_ids", hidden),
+        ):
             for event_id in event_ids:
                 if event_id not in event_by_id:
-                    issues.append(f"$.prediction_context.{category}: unknown event id {event_id!r}")
+                    issues.append(
+                        f"$.prediction_context.{category}: unknown event id {event_id!r}"
+                    )
 
         if cutoff is not None:
             for event_id in permitted:
@@ -197,7 +212,10 @@ def validate_record_data(
         if birth_provenance.get("source_type") != "synthetic":
             issues.append("$.birth.provenance.source_type must be synthetic for synthetic records")
         for index, event in enumerate(events):
-            if isinstance(event, dict) and event.get("provenance", {}).get("source_type") != "synthetic":
+            if (
+                isinstance(event, dict)
+                and event.get("provenance", {}).get("source_type") != "synthetic"
+            ):
                 issues.append(
                     f"$.events[{index}].provenance.source_type must be synthetic for synthetic records"
                 )
