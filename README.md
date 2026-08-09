@@ -100,9 +100,8 @@ examples/synthetic/      Fictional records used only for tests and demos
 benchmark/               Task specifications and result-card conventions
 research/                Falsifiable experiment plans
 model/                   Architecture notes
-                          
-docs/                     Project overview and contributor documentation
-.github/                  CI, issue forms, and pull-request template
+docs/                    Project overview and contributor documentation
+.github/                 CI, issue forms, and pull-request template
 ```
 
 See:
@@ -137,6 +136,17 @@ The easiest useful contributions are standardized artifacts, not broad declarati
 6. improve one Chinese-English terminology record or source note.
 
 Each contribution type has an issue form and acceptance criteria. See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+### Current contribution opportunities
+
+- [Review the starter life-event ontology across disciplines](https://github.com/DeeplumenClaw/human-trajectory-model/issues/2)
+- [Add machine-readable benchmark-task and prediction-output schemas](https://github.com/DeeplumenClaw/human-trajectory-model/issues/3)
+- [Add a synthetic interval-duration trajectory example](https://github.com/DeeplumenClaw/human-trajectory-model/issues/4) — good first issue
+- [Implement a history-only next-event baseline](https://github.com/DeeplumenClaw/human-trajectory-model/issues/5)
+- [Create the public Chinese-English terminology record template](https://github.com/DeeplumenClaw/human-trajectory-model/issues/6) — good first issue
+- [Design a source-grounded theory-claim record format](https://github.com/DeeplumenClaw/human-trajectory-model/issues/7)
+
+Please comment on an issue before starting a substantial contribution so scope and ownership are visible.
 
 ## Research principles
 
