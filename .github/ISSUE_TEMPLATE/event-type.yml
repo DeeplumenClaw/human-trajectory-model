@@ -43,7 +43,7 @@ body:
   - type: textarea
     id: risks
     attributes:
-      label: Cultural, historical, privacy, or leakage risks
+      label: Cultural, historical, data-governance, or leakage risks
     validations:
       required: true
   - type: checkboxes
@@ -51,5 +51,7 @@ body:
     attributes:
       label: Data declaration
       options:
-        - label: This proposal contains no private-conversation case or unconsented private-person data.
+        - label: This proposal contains no repository-owner trajectory data and is not derived from the owner's private communications.
+          required: true
+        - label: Any non-synthetic example uses a declared public, consent, license, or approved-protocol basis.
           required: true
