@@ -22,8 +22,9 @@ Validation checks:
 - prediction-cutoff leakage;
 - hidden/permitted event separation;
 - synthetic provenance;
-- private-conversation and unconsented-data flags;
-- prohibited private-data field names.
+- repository-owner opt-out flags;
+- third-party source and authorization-basis fields;
+- prohibited raw identifiers, secrets, and private-correspondence field names.
 
 ## Run the synthetic smoke test
 
