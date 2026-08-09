@@ -1,0 +1,34 @@
+{
+  "baseline": {
+    "laplace_alpha": 1.0,
+    "predicted_label": "career.founding_company",
+    "probabilities": {
+      "career.founding_company": 0.42857142857142855,
+      "career.role_change": 0.2857142857142857,
+      "family.childbirth": 0.2857142857142857
+    },
+    "train_target_counts": {
+      "career.founding_company": 2,
+      "career.role_change": 1,
+      "family.childbirth": 1
+    },
+    "type": "global_frequency"
+  },
+  "disclaimer": "This task uses six fictional records. Its results are not scientific evidence about human predictability or any traditional or modern representation.",
+  "evaluation": {
+    "metrics": {
+      "accuracy": 0.5,
+      "log_loss": 1.0500304144412858,
+      "multiclass_brier": 0.6326530612244898
+    },
+    "test_records": 2,
+    "test_targets": [
+      "career.founding_company",
+      "career.role_change"
+    ],
+    "train_records": 4
+  },
+  "implementation_version": "0.1.0",
+  "status": "infrastructure_only",
+  "task_id": "htm.synthetic.next_event_type.v0.1"
+}
