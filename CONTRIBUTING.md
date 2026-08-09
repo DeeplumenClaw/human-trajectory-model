@@ -2,11 +2,22 @@
 
 HTM is an open research project. A useful contribution can be code, a schema change, a source correction, a benchmark design, a negative result, or a carefully bounded theory representation. It does not need to support any predetermined conclusion.
 
-## Non-negotiable data boundary
+## Data boundary and third-party pathways
 
 Before contributing, read [DATA_POLICY.md](DATA_POLICY.md).
 
-Never submit cases or personal information obtained from private conversations, chats, consultations, family, friends, clients, or other private individuals. A synthetic example must be intentionally fictional, not a lightly altered real case. Pull requests containing unauthorized personal data will be closed and the data may require history remediation.
+The repository owner's personal trajectory is an absolute opt-out. Never submit a record about the owner or material derived from the owner's private communications. A third-party fact mentioned in an owner communication must be sourced independently before it can be considered.
+
+Other people are not covered by that blanket owner opt-out. A third-party record may be proposed when it has one declared basis:
+
+- public record;
+- informed consent;
+- a compatible dataset license;
+- an approved research protocol.
+
+The contribution must document provenance, allowed uses, redistribution limits, and the review appropriate to that basis. Do not commit unnecessary raw secrets, government identifiers, bank-account numbers, private correspondence, or personal contact details.
+
+A synthetic example must be intentionally fictional, not a lightly altered real case.
 
 ## Development setup
 
@@ -35,7 +46,7 @@ Edit `ontology/event-types.yaml`. A contribution must include:
 - at least one positive example;
 - at least one exclusion or boundary case;
 - required attributes, if any;
-- discussion of cultural, historical, privacy, or leakage limitations.
+- discussion of cultural, historical, data-governance, or leakage limitations.
 
 Acceptance means the definition can be applied consistently by someone other than its author and all validation tests pass.
 
@@ -46,7 +57,8 @@ Add a JSON record under `examples/synthetic/`. It must:
 - pass the executable schemas;
 - be intentionally fictional;
 - use only ontology event types;
-- set both private-data flags to `false`;
+- use `authorization_basis: synthetic`;
+- set both owner-protection flags to `false`;
 - use synthetic provenance for birth and events;
 - contain a prediction cutoff with permitted and hidden event IDs;
 - add or update a test when it exercises new behavior.
@@ -68,7 +80,7 @@ Open a benchmark-task issue before implementing a major task. Define:
 - baseline models;
 - metrics and calibration reporting;
 - leakage risks and exclusions;
-- data governance and licensing;
+- source, authorization, publication, and licensing rules;
 - conditions under which the hypothesis would be rejected or downgraded.
 
 A benchmark should reward calibrated, reproducible prediction rather than persuasive narrative.
@@ -136,7 +148,7 @@ A pull request should explain:
 - evidence or sources;
 - how to validate it;
 - limitations and competing interpretations;
-- data and licensing implications.
+- data basis, licensing, and publication implications.
 
 Before opening a pull request:
 
@@ -146,14 +158,14 @@ htm benchmark benchmark/tasks/next-event-synthetic-v0.1.yaml
 pytest -q
 ```
 
-The pull-request template contains a mandatory privacy declaration.
+The pull-request template contains mandatory owner-opt-out and third-party data-basis declarations.
 
 ## Review and task ownership
 
 - Comment on an issue before beginning a substantial contribution.
 - Maintainers may assign or mark an issue as claimed.
 - If work becomes inactive, the issue may be reopened for another contributor.
-- Reviews evaluate evidence, scope, compatibility, privacy, and reproducibility—not agreement with a preferred theory.
+- Reviews evaluate evidence, scope, compatibility, data basis, and reproducibility—not agreement with a preferred theory.
 - A null or negative result is eligible for acceptance when the protocol is sound.
 
 ## Language and conduct
