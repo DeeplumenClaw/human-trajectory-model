@@ -1,0 +1,264 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://htm-project.org/schemas/trajectory-record.schema.json",
+  "title": "HTM Trajectory Record",
+  "description": "Minimum versioned record for HTM trajectory research.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "record_id",
+    "entity_type",
+    "synthetic",
+    "data_governance",
+    "birth",
+    "background",
+    "events",
+    "prediction_context",
+    "derived"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "0.1.0"
+    },
+    "record_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]{2,63}$"
+    },
+    "entity_type": {
+      "type": "string",
+      "enum": ["synthetic", "public_figure", "consented_volunteer"]
+    },
+    "synthetic": {
+      "type": "boolean"
+    },
+    "public_name": {
+      "type": ["string", "null"],
+      "maxLength": 200
+    },
+    "data_governance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_scope",
+        "contains_private_conversation_data",
+        "contains_unconsented_private_data",
+        "license",
+        "review_status"
+      ],
+      "properties": {
+        "source_scope": {
+          "type": "string",
+          "enum": ["synthetic", "public_record", "consented"]
+        },
+        "contains_private_conversation_data": {
+          "type": "boolean",
+          "const": false
+        },
+        "contains_unconsented_private_data": {
+          "type": "boolean",
+          "const": false
+        },
+        "license": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "review_status": {
+          "type": "string",
+          "enum": ["synthetic_verified", "unreviewed", "reviewed"]
+        }
+      }
+    },
+    "birth": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "local_date",
+        "local_time",
+        "timezone",
+        "location",
+        "time_precision",
+        "confidence_grade",
+        "provenance",
+        "ambiguities"
+      ],
+      "properties": {
+        "local_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "local_time": {
+          "type": ["string", "null"],
+          "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$"
+        },
+        "timezone": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "location": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["city", "country", "latitude", "longitude"],
+          "properties": {
+            "city": {"type": "string", "maxLength": 200},
+            "country": {"type": "string", "maxLength": 200},
+            "latitude": {"type": ["number", "null"], "minimum": -90, "maximum": 90},
+            "longitude": {"type": ["number", "null"], "minimum": -180, "maximum": 180}
+          }
+        },
+        "time_precision": {
+          "type": "string",
+          "enum": ["exact", "minute", "hour", "approximate", "unknown"]
+        },
+        "confidence_grade": {
+          "type": "string",
+          "enum": ["AA", "A", "B", "C", "D", "synthetic", "unknown"]
+        },
+        "provenance": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["source_type", "citation", "accessed_at"],
+          "properties": {
+            "source_type": {
+              "type": "string",
+              "enum": [
+                "synthetic",
+                "certificate",
+                "official_record",
+                "direct_statement",
+                "biography",
+                "secondary",
+                "consented_statement",
+                "unknown"
+              ]
+            },
+            "citation": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 1000
+            },
+            "accessed_at": {
+              "type": ["string", "null"],
+              "format": "date"
+            }
+          }
+        },
+        "ambiguities": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["daylight_saving", "calendar_system", "alternative_times"],
+          "properties": {
+            "daylight_saving": {"type": ["string", "null"], "maxLength": 300},
+            "calendar_system": {"type": "string", "minLength": 1, "maxLength": 100},
+            "alternative_times": {
+              "type": "array",
+              "items": {"type": "string", "maxLength": 100},
+              "uniqueItems": true
+            }
+          }
+        }
+      }
+    },
+    "background": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sex_or_gender",
+        "birth_region",
+        "socioeconomic_context",
+        "family_context",
+        "historical_cohort"
+      ],
+      "properties": {
+        "sex_or_gender": {"type": ["string", "null"], "maxLength": 100},
+        "birth_region": {"type": ["string", "null"], "maxLength": 200},
+        "socioeconomic_context": {"type": ["string", "null"], "maxLength": 200},
+        "family_context": {"type": ["object", "null"], "additionalProperties": true},
+        "historical_cohort": {"type": "string", "minLength": 1, "maxLength": 200}
+      }
+    },
+    "events": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "https://htm-project.org/schemas/life-event.schema.json"
+      }
+    },
+    "prediction_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "cutoff_date",
+        "information_snapshot_id",
+        "permitted_event_ids",
+        "hidden_future_event_ids"
+      ],
+      "properties": {
+        "cutoff_date": {"type": "string", "format": "date"},
+        "information_snapshot_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9._-]{2,127}$"
+        },
+        "permitted_event_ids": {
+          "type": "array",
+          "items": {"type": "string"},
+          "uniqueItems": true
+        },
+        "hidden_future_event_ids": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"type": "string"},
+          "uniqueItems": true
+        }
+      }
+    },
+    "derived": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "demographic_features_version",
+        "birth_representation_version",
+        "trajectory_encoding_version",
+        "generated_at"
+      ],
+      "properties": {
+        "demographic_features_version": {"type": "string", "minLength": 1},
+        "birth_representation_version": {"type": ["string", "null"]},
+        "trajectory_encoding_version": {"type": "string", "minLength": 1},
+        "generated_at": {"type": "string", "format": "date-time"}
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {"entity_type": {"const": "synthetic"}},
+        "required": ["entity_type"]
+      },
+      "then": {
+        "properties": {
+          "synthetic": {"const": true},
+          "public_name": {"type": "null"},
+          "data_governance": {
+            "properties": {
+              "source_scope": {"const": "synthetic"},
+              "review_status": {"const": "synthetic_verified"}
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {"synthetic": {"const": true}},
+        "required": ["synthetic"]
+      },
+      "then": {
+        "properties": {"entity_type": {"const": "synthetic"}}
+      }
+    }
+  ]
+}
