@@ -1,0 +1,34 @@
+name: Documentation or terminology improvement
+description: Correct, clarify, translate, or improve an existing public artifact
+title: "[Docs] "
+body:
+  - type: input
+    id: location
+    attributes:
+      label: File or section
+      placeholder: README.md — Current artifact
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+    validations:
+      required: true
+  - type: textarea
+    id: change
+    attributes:
+      label: Proposed change
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Sources or terminology notes
+  - type: checkboxes
+    id: declaration
+    attributes:
+      label: Declaration
+      options:
+        - label: This issue contains no private-conversation case or unconsented private-person data.
+          required: true
