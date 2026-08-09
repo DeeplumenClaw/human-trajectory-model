@@ -5,8 +5,10 @@ These records are intentionally fictional and exist only to exercise schemas, va
 Every record declares:
 
 - `entity_type: synthetic`;
-- `contains_private_conversation_data: false`;
-- `contains_unconsented_private_data: false`;
+- `source_scope: synthetic`;
+- `authorization_basis: synthetic`;
+- `contains_repository_owner_data: false`;
+- `derived_from_owner_private_communications: false`;
 - synthetic provenance for birth and events.
 
-Do not create a “synthetic” example by changing the name or a few dates in a real private case.
+Do not create a “synthetic” example by changing the name or a few dates in the repository owner or another real case.
