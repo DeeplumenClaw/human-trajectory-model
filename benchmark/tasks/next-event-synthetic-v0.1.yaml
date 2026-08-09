@@ -1,0 +1,40 @@
+id: htm.synthetic.next_event_type.v0.1
+title: Synthetic next-event type smoke test
+status: infrastructure_only
+purpose: >-
+  Verify that versioned records, prediction cutoffs, target extraction,
+  baseline execution, and result-card metrics work end to end.
+disclaimer: >-
+  This task uses six fictional records. Its results are not scientific evidence
+  about human predictability or any traditional or modern representation.
+dataset:
+  records:
+    - examples/synthetic/trajectory_001.json
+    - examples/synthetic/trajectory_002.json
+    - examples/synthetic/trajectory_003.json
+    - examples/synthetic/trajectory_004.json
+    - examples/synthetic/trajectory_005.json
+    - examples/synthetic/trajectory_006.json
+split:
+  train_record_ids:
+    - synthetic-001
+    - synthetic-002
+    - synthetic-003
+    - synthetic-004
+  test_record_ids:
+    - synthetic-005
+    - synthetic-006
+target:
+  type: next_event_type
+  rule: first_hidden_event_after_cutoff
+  allowed_event_types:
+    - career.founding_company
+    - career.role_change
+    - family.childbirth
+baseline:
+  type: global_frequency
+  laplace_alpha: 1.0
+metrics:
+  - accuracy
+  - log_loss
+  - multiclass_brier

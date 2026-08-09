@@ -1,0 +1,145 @@
+{
+  "schema_version": "0.1.0",
+  "record_id": "synthetic-002",
+  "entity_type": "synthetic",
+  "synthetic": true,
+  "public_name": null,
+  "data_governance": {
+    "source_scope": "synthetic",
+    "contains_private_conversation_data": false,
+    "contains_unconsented_private_data": false,
+    "license": "Apache-2.0",
+    "review_status": "synthetic_verified"
+  },
+  "birth": {
+    "local_date": "1987-11-03",
+    "local_time": "14:10",
+    "timezone": "Europe/London",
+    "location": {
+      "city": "Northbridge",
+      "country": "GB",
+      "latitude": null,
+      "longitude": null
+    },
+    "time_precision": "minute",
+    "confidence_grade": "synthetic",
+    "provenance": {
+      "source_type": "synthetic",
+      "citation": "synthetic://synthetic-002/birth",
+      "accessed_at": null
+    },
+    "ambiguities": {
+      "daylight_saving": null,
+      "calendar_system": "proleptic_gregorian",
+      "alternative_times": []
+    }
+  },
+  "background": {
+    "sex_or_gender": null,
+    "birth_region": "Northbridge, GB",
+    "socioeconomic_context": "synthetic-middle-context",
+    "family_context": null,
+    "historical_cohort": "1980s-urban-cohort"
+  },
+  "events": [
+    {
+      "event_id": "e01",
+      "event_type": "education.enrollment",
+      "start_date": "2005-09-01",
+      "end_date": null,
+      "date_precision": "day",
+      "location": "Metro B",
+      "attributes": {},
+      "evidence_confidence": "synthetic",
+      "provenance": {
+        "source_type": "synthetic",
+        "citation": "synthetic://synthetic-002/e01",
+        "accessed_at": null
+      },
+      "label_eligibility": "synthetic"
+    },
+    {
+      "event_id": "e02",
+      "event_type": "education.graduation",
+      "start_date": "2009-06-30",
+      "end_date": null,
+      "date_precision": "day",
+      "location": "Metro B",
+      "attributes": {},
+      "evidence_confidence": "synthetic",
+      "provenance": {
+        "source_type": "synthetic",
+        "citation": "synthetic://synthetic-002/e02",
+        "accessed_at": null
+      },
+      "label_eligibility": "synthetic"
+    },
+    {
+      "event_id": "e03",
+      "event_type": "career.employment_start",
+      "start_date": "2009-09-01",
+      "end_date": null,
+      "date_precision": "day",
+      "location": "Metro B",
+      "attributes": {},
+      "evidence_confidence": "synthetic",
+      "provenance": {
+        "source_type": "synthetic",
+        "citation": "synthetic://synthetic-002/e03",
+        "accessed_at": null
+      },
+      "label_eligibility": "synthetic"
+    },
+    {
+      "event_id": "e04",
+      "event_type": "migration.cross_border",
+      "start_date": "2013-08-20",
+      "end_date": null,
+      "date_precision": "day",
+      "location": "Metro C",
+      "attributes": {},
+      "evidence_confidence": "synthetic",
+      "provenance": {
+        "source_type": "synthetic",
+        "citation": "synthetic://synthetic-002/e04",
+        "accessed_at": null
+      },
+      "label_eligibility": "synthetic"
+    },
+    {
+      "event_id": "e05",
+      "event_type": "career.role_change",
+      "start_date": "2017-02-01",
+      "end_date": null,
+      "date_precision": "day",
+      "location": "Metro C",
+      "attributes": {},
+      "evidence_confidence": "synthetic",
+      "provenance": {
+        "source_type": "synthetic",
+        "citation": "synthetic://synthetic-002/e05",
+        "accessed_at": null
+      },
+      "label_eligibility": "synthetic"
+    }
+  ],
+  "prediction_context": {
+    "cutoff_date": "2015-12-31",
+    "information_snapshot_id": "synthetic-002-snapshot-v1",
+    "permitted_event_ids": [
+      "e01",
+      "e02",
+      "e03",
+      "e04"
+    ],
+    "hidden_future_event_ids": [
+      "e05"
+    ]
+  },
+  "derived": {
+    "demographic_features_version": "none-v0",
+    "birth_representation_version": null,
+    "trajectory_encoding_version": "raw-events-v0.1",
+    "generated_at": "2026-08-09T00:00:00Z"
+  }
+}

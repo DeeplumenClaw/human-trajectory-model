@@ -1,0 +1,66 @@
+name: Propose a benchmark task
+description: Define a falsifiable trajectory task, baseline, metric, and leakage controls
+title: "[Benchmark] "
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Research question
+      description: What narrow question would this benchmark answer?
+    validations:
+      required: true
+  - type: textarea
+    id: inputs
+    attributes:
+      label: Inputs available at prediction time
+      description: Include the cutoff and prohibited future information.
+    validations:
+      required: true
+  - type: textarea
+    id: target
+    attributes:
+      label: Target, horizon, and label rule
+    validations:
+      required: true
+  - type: textarea
+    id: split
+    attributes:
+      label: Train, validation, and test strategy
+      description: Explain temporal, identity, cohort, and duplicate controls.
+    validations:
+      required: true
+  - type: textarea
+    id: baselines
+    attributes:
+      label: Required baselines
+      description: Include at least one strong non-traditional baseline.
+    validations:
+      required: true
+  - type: textarea
+    id: metrics
+    attributes:
+      label: Metrics, calibration, and uncertainty
+    validations:
+      required: true
+  - type: textarea
+    id: failure
+    attributes:
+      label: Failure or downgrade criteria
+      description: What outcome would reject, narrow, or downgrade the hypothesis?
+    validations:
+      required: true
+  - type: textarea
+    id: data
+    attributes:
+      label: Data governance, provenance, and license
+    validations:
+      required: true
+  - type: checkboxes
+    id: declaration
+    attributes:
+      label: Declarations
+      options:
+        - label: I have read DATA_POLICY.md.
+          required: true
+        - label: The proposal does not rely on private-conversation cases or unconsented private-person data.
+          required: true

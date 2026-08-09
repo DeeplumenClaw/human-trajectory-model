@@ -1,0 +1,113 @@
+version: 0.1.0
+status: starter
+notes: >-
+  This vocabulary is intentionally small. Definitions are contribution contracts,
+  not claims that every life can be represented without cultural or historical bias.
+event_types:
+  - id: education.enrollment
+    domain: education
+    definition: Formal entry into an educational program or institution.
+    examples:
+      - Enrollment in a university degree program.
+    exclusions:
+      - Informal self-study without a defined program.
+    required_attributes: []
+
+  - id: education.graduation
+    domain: education
+    definition: Completion of a formal educational program with a documented credential or completion status.
+    examples:
+      - Completion of an undergraduate degree.
+    exclusions:
+      - Attendance without completion.
+    required_attributes: []
+
+  - id: career.employment_start
+    domain: career
+    definition: Start of a documented employment relationship or sustained occupational role.
+    examples:
+      - Beginning a full-time role at an organization.
+    exclusions:
+      - A one-day informal task.
+    required_attributes: []
+
+  - id: career.employment_end
+    domain: career
+    definition: End of a documented employment relationship or sustained occupational role.
+    examples:
+      - Leaving an employer.
+    exclusions:
+      - A temporary leave when the role remains active.
+    required_attributes: []
+
+  - id: career.role_change
+    domain: career
+    definition: A material change in occupational role, function, seniority, or professional field.
+    examples:
+      - Moving from engineering into product leadership.
+    exclusions:
+      - A title formatting change with no material role change.
+    required_attributes: []
+
+  - id: career.founding_company
+    domain: career
+    definition: Becoming a documented founder or co-founder of a newly established organization.
+    examples:
+      - Incorporating and founding a new company.
+    exclusions:
+      - Advising a company without founder status.
+    required_attributes: []
+
+  - id: migration.domestic
+    domain: migration
+    definition: A sustained move between materially distinct regions within one country.
+    examples:
+      - Moving residence from one province or state to another.
+    exclusions:
+      - Short-term travel.
+    required_attributes: []
+
+  - id: migration.cross_border
+    domain: migration
+    definition: A sustained move of residence across an international border.
+    examples:
+      - Relocating to another country for work or study.
+    exclusions:
+      - Tourism or a short business trip.
+    required_attributes: []
+
+  - id: relationship.marriage
+    domain: relationship
+    definition: Entry into a legally or publicly documented marriage.
+    examples:
+      - Civil or legally recognized marriage.
+    exclusions:
+      - Unverified rumor about a relationship.
+    required_attributes: []
+
+  - id: relationship.separation
+    domain: relationship
+    definition: Publicly documented separation or dissolution of a long-term partnership or marriage.
+    examples:
+      - Legal divorce.
+    exclusions:
+      - Temporary physical distance without relationship dissolution.
+    required_attributes: []
+
+  - id: family.childbirth
+    domain: family
+    definition: Birth of a child within the person's immediate family context when ethically and lawfully recorded.
+    examples:
+      - Birth of a first child in a synthetic or properly governed record.
+    exclusions:
+      - Information about a non-public relative collected without authorization.
+    required_attributes: []
+
+  - id: health.major_diagnosis
+    domain: health
+    definition: A major diagnosis recorded under an approved data protocol with appropriate privacy controls.
+    examples:
+      - A synthetic major diagnosis used to test temporal schema behavior.
+    exclusions:
+      - Private medical information obtained from conversation or rumor.
+    required_attributes: []

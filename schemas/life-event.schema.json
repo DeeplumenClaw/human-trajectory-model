@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://htm-project.org/schemas/life-event.schema.json",
+  "title": "HTM Life Event",
+  "description": "A timestamped life event with evidence and label-governance metadata.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "event_id",
+    "event_type",
+    "start_date",
+    "end_date",
+    "date_precision",
+    "location",
+    "attributes",
+    "evidence_confidence",
+    "provenance",
+    "label_eligibility"
+  ],
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]{2,63}$"
+    },
+    "event_type": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "start_date": {
+      "type": ["string", "null"],
+      "format": "date"
+    },
+    "end_date": {
+      "type": ["string", "null"],
+      "format": "date"
+    },
+    "date_precision": {
+      "type": "string",
+      "enum": ["day", "month", "year", "interval", "unknown"]
+    },
+    "location": {
+      "type": ["string", "null"],
+      "maxLength": 200
+    },
+    "attributes": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "evidence_confidence": {
+      "type": "string",
+      "enum": ["high", "medium", "low", "synthetic"]
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_type", "citation", "accessed_at"],
+      "properties": {
+        "source_type": {
+          "type": "string",
+          "enum": [
+            "synthetic",
+            "official",
+            "primary",
+            "reputable_secondary",
+            "consented_statement",
+            "other"
+          ]
+        },
+        "citation": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        },
+        "accessed_at": {
+          "type": ["string", "null"],
+          "format": "date"
+        }
+      }
+    },
+    "label_eligibility": {
+      "type": "string",
+      "enum": ["train", "validation", "test", "excluded", "synthetic"]
+    }
+  }
+}

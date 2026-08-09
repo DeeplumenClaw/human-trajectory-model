@@ -1,0 +1,61 @@
+name: Research or theory proposal
+description: Propose a sourced representation, experiment, replication, or criticism
+title: "[Research] "
+body:
+  - type: dropdown
+    id: contribution_kind
+    attributes:
+      label: Contribution kind
+      options:
+        - Historical source reconstruction
+        - Theory formalization
+        - Baseline or model
+        - Replication
+        - Negative result
+        - Statistical or causal critique
+        - Terminology or translation
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: claim
+    attributes:
+      label: Claim or problem
+      description: Make the scope as narrow and testable as possible.
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Sources or evidence
+      description: Separate historical source, commentary, practitioner claim, and project hypothesis.
+    validations:
+      required: true
+  - type: textarea
+    id: artifact
+    attributes:
+      label: Proposed artifact
+      description: What exact file, code, schema, dataset protocol, or result would be produced?
+    validations:
+      required: true
+  - type: textarea
+    id: review
+    attributes:
+      label: Review or test method
+    validations:
+      required: true
+  - type: textarea
+    id: limitations
+    attributes:
+      label: Limitations, counterexamples, and competing interpretations
+    validations:
+      required: true
+  - type: checkboxes
+    id: declaration
+    attributes:
+      label: Declarations
+      options:
+        - label: This proposal contains no private-conversation case or unconsented private-person data.
+          required: true
+        - label: I will not submit unlicensed copyrighted text.
+          required: true

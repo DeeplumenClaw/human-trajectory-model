@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use HTM schemas, benchmarks, or software, please cite this repository and the specific release used."
+title: "Human Trajectory Model"
+type: software
+version: 0.1.0
+authors:
+  - name: "Human Trajectory Model Contributors"
+repository-code: "https://github.com/DeeplumenClaw/human-trajectory-model"
+license: Apache-2.0
+keywords:
+  - human trajectory
+  - life course
+  - longitudinal data
+  - temporal modeling
+  - benchmark
+  - knowledge representation
